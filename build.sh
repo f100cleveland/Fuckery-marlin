@@ -16,7 +16,7 @@ export CROSS_COMPILE=${HOME}/tipsy/prebuilts/gcc/linux-x86/aarch64/aarch64-8.0/b
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel"
+VER=".pissel-1.2"
 
 # Paths
 KERNEL_DIR=`pwd`
