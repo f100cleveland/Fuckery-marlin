@@ -2948,11 +2948,13 @@ static void sched_freq_tick_pelt(int cpu)
 static void sched_freq_tick_walt(int cpu)
 {
 	unsigned long cpu_utilization = boosted_cpu_util(cpu);
+	unsigned long capacity_curr = capacity_curr_of(cpu);
 
 	if (walt_disabled || !sysctl_sched_use_walt_cpu_util)
 		return sched_freq_tick_pelt(cpu);
 
-	cpu_utilization = cpu_utilization * SCHED_CAPACITY_SCALE / capacity_orig_of(cpu);
+	if (cpu_utilization <= capacity_curr)
+		return;
 
 	/*
 	 * It is likely that the load is growing so we
