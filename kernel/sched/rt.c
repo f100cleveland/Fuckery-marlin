@@ -1491,13 +1491,76 @@ out:
 extern int
 __update_load_avg_blocked_rt_se(u64 now, int cpu, struct sched_rt_entity *rt_se);
 
+#ifdef CONFIG_RT_GROUP_SCHED
 /*
- * XXX broken on 32BIT (see fair:rt_rq_last_update_time)
+ * Called within set_task_rq() right before setting a task's cpu. The
+ * caller only guarantees p->pi_lock is held; no other assumptions,
+ * including the state of rq->lock, should be made.
  */
+void set_task_rq_rt(struct sched_rt_entity *rt_se,
+		    struct rt_rq *prev, struct rt_rq *next)
+{
+	if (!sched_feat(ATTACH_AGE_LOAD))
+		return;
+
+	/*
+	 * We are supposed to update the task to "current" time, then its up to
+	 * date and ready to go to new CPU/cfs_rq. But we have difficulty in
+	 * getting what current time is, so simply throw away the out-of-date
+	 * time. This will result in the wakee task is less decayed, but giving
+	 * the wakee more load sounds not bad.
+	 */
+	if (rt_se->avg.last_update_time && prev) {
+		u64 p_last_update_time;
+		u64 n_last_update_time;
+
+#ifndef CONFIG_64BIT
+		u64 p_last_update_time_copy;
+		u64 n_last_update_time_copy;
+
+		do {
+			p_last_update_time_copy = prev->load_last_update_time_copy;
+			n_last_update_time_copy = next->load_last_update_time_copy;
+
+			smp_rmb();
+
+			p_last_update_time = prev->avg.last_update_time;
+			n_last_update_time = next->avg.last_update_time;
+
+		} while (p_last_update_time != p_last_update_time_copy ||
+			 n_last_update_time != n_last_update_time_copy);
+#else
+		p_last_update_time = prev->avg.last_update_time;
+		n_last_update_time = next->avg.last_update_time;
+#endif
+		update_load_avg_rt_se(p_last_update_time,
+				      cpu_of(rq_of_rt_rq(prev)),
+				      rt_se, 0);
+		rt_se->avg.last_update_time = n_last_update_time;
+	}
+}
+#endif /* CONFIG_RT_GROUP_SCHED */
+
+#ifndef CONFIG_64BIT
+static inline u64 rt_rq_last_update_time(struct rt_rq *rt_rq)
+{
+	u64 last_update_time_copy;
+	u64 last_update_time;
+
+	do {
+		last_update_time_copy = rt_rq->load_last_update_time_copy;
+		smp_rmb();
+		last_update_time = rt_rq->avg.last_update_time;
+	} while (last_update_time != last_update_time_copy);
+
+	return last_update_time;
+}
+#else
 static inline u64 rt_rq_last_update_time(struct rt_rq *rt_rq)
 {
 	return rt_rq->avg.last_update_time;
 }
+#endif
 
 /*
  * Synchronize entity load avg of dequeued entity without locking

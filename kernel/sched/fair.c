@@ -2914,6 +2914,12 @@ int update_rt_rq_load_avg(u64 now, int cpu, struct rt_rq *rt_rq, int running)
 	}
 
 	ret = __update_load_avg(now, cpu, sa, 0, running, NULL);
+
+#ifndef CONFIG_64BIT
+	smp_wmb();
+	rt_rq->load_last_update_time_copy = sa->last_update_time;
+#endif
+
 	trace_printk("sched_load_rt_rq: cpu=%d util=%lu", cpu, rt_rq->avg.util_avg);
 
 	return ret;
