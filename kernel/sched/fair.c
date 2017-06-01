@@ -5364,7 +5364,6 @@ static inline int __energy_diff(struct energy_env *eenv)
 	struct sched_domain *sd;
 	struct sched_group *sg;
 	int sd_cpu = -1;
-	int margin;
 
 	if (eenv->src_cpu == eenv->dst_cpu)
 		return 0;
@@ -5386,6 +5385,13 @@ static inline int __energy_diff(struct energy_env *eenv)
 
 	} while (sg = sg->next, sg != sd->groups);
 
+#ifdef CONFIG_SCHED_TUNE
+	/*
+	 * Normalize E and P variations
+	 */
+	__update_perf_energy_deltas(eenv);
+#else
+
 	/*
 	 * Use absolute E variations for dead-zone filtering
 	 */
@@ -5394,16 +5400,13 @@ static inline int __energy_diff(struct energy_env *eenv)
 	/*
 	 * Dead-zone margin preventing too many migrations.
 	 */
-	margin = eenv->before.energy >> 6; /* ~1.56% */
-	if (abs(eenv->nrg_delta) < margin)
-		eenv->nrg_delta = 0;
+	{
+		int margin = eenv->before.energy >> 6; /* ~1.56% */
 
-#ifdef CONFIG_SCHED_TUNE
-	/*
-	 * Normalize E and P variations
-	 */
-	__update_perf_energy_deltas(eenv);
-#else
+		if (abs(eenv->nrg_delta) < margin)
+			eenv->nrg_delta = 0;
+	}
+
 	/*
 	 * When SCHED_TUNE is enabled, we trace this elsewhere
 	 * to get more information about performance indices.
