@@ -16,7 +16,7 @@ export CROSS_COMPILE=${HOME}/tipsy/prebuilts/gcc/linux-x86/aarch64/aarch64-8.0/b
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.2"
+VER=".pissel-1.3-old-tc-upstream"
 
 # Paths
 KERNEL_DIR=`pwd`
@@ -24,7 +24,7 @@ REPACK_DIR="${HOME}/AnyKernel"
 PATCH_DIR="${HOME}/AnyKernel/patch"
 MODULES_DIR="${HOME}/AnyKernel/modules"
 ZIP_MOVE="${HOME}/fuckery"
-ZIMAGE_DIR="${HOME}/tipsy/kernel/google/marlin/arch/arm64/boot/"
+ZIMAGE_DIR="${HOME}/pissel/arch/arm64/boot"
 
 # Functions
 function clean_all {
