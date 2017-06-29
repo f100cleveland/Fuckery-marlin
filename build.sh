@@ -9,14 +9,14 @@ restore='\033[0m'
 clear
 
 # Resources
-THREAD="-j$(grep -c ^processor /proc/cpuinfo)"
+THREAD="-j26"
 KERNEL="Image"
 DTBIMAGE="dtb"
 export CROSS_COMPILE=${HOME}/tipsy/prebuilts/gcc/linux-x86/aarch64/aarch64-8.0/bin/aarch64-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.31-rebase"
+VER=".pissel-1.32-rebase"
 
 # Paths
 KERNEL_DIR=`pwd`
