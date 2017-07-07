@@ -406,7 +406,8 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-delete-null-pointer-checks \
 		   -std=gnu89 -Wno-format-truncation -Wno-bool-operation \
 		   -Wno-memset-elt-size -Wno-format-overflow -fno-store-merging \
-           -mcpu=cortex-a57.cortex-a53 -mtune=cortex-a57.cortex-a53
+           -mcpu=cortex-a57.cortex-a53 -mtune=cortex-a57.cortex-a53 \
+           -ffast-math
 
 BUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
@@ -618,7 +619,7 @@ KBUILD_CFLAGS	+= $(call cc-option,-fno-delete-null-pointer-checks,)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
-KBUILD_CFLAGS	+= -O3
+KBUILD_CFLAGS	+= -Ofast
 KBUILD_CFLAGS += $(call cc-disable-warning,maybe-uninitialized)
 KBUILD_CFLAGS += $(call cc-disable-warning,array-bounds)
 endif
