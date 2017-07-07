@@ -12,11 +12,11 @@ clear
 THREAD="-j26"
 KERNEL="Image"
 DTBIMAGE="dtb"
-export CROSS_COMPILE=${HOME}/Downloads/TC-QU8.0-kryo-aarch/bin/aarch64-QUVNTNM_TOOLCHAIN-linux-gnu-
+export CROSS_COMPILE=${HOME}/Downloads/TC-Q8.0-kryo-aarch/bin/aarch64-QUVNTNM_TOOLCHAIN-linux-gnu-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.12-upstream-8.0"
+VER=".pissel-1.13-upstream-8.0"
 
 # Paths
 KERNEL_DIR=`pwd`
