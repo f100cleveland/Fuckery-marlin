@@ -248,8 +248,8 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/x86/ -e s/x86_64/x86/ \
 # "make" in the configured kernel build directory always uses that.
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
-ARCH		?= $(SUBARCH)
-CROSS_COMPILE	?= /home/hellsgod/Android/Kernel/aarch64-linux-android-6.x/bin/aarch64-linux-android-
+ARCH		?= arm64
+CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -399,13 +399,14 @@ LINUXINCLUDE    := \
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 
-KBUILD_CFLAGS   := -Werror -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -Wno-error=unused-const-variable -Wno-error=bool-compare \
-                   -Wno-error=misleading-indentation -Wno-error=discarded-array-qualifiers -Wno-error=return-local-addr \
-		           -fno-strict-aliasing -fno-common \
-		           -Werror-implicit-function-declaration \
-		           -Wno-format-security \
-                   -mcpu=cortex-a57.cortex-a53 -mtune=cortex-a57.cortex-a53 \
-		           -std=gnu89
+KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+		   -fno-strict-aliasing -fno-common \
+		   -Wno-format-security \
+		   -fno-delete-null-pointer-checks \
+		   -std=gnu89 -Wno-format-truncation -Wno-bool-operation \
+		   -Wno-memset-elt-size -Wno-format-overflow -fno-store-merging \
+           -mcpu=cortex-a57.cortex-a53 -mtune=cortex-a57.cortex-a53 \
+           -ffast-math
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
@@ -617,7 +618,7 @@ KBUILD_CFLAGS	+= $(call cc-option,-fno-delete-null-pointer-checks,)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
-KBUILD_CFLAGS	+= -O3
+KBUILD_CFLAGS	+= -Ofast
 KBUILD_CFLAGS += $(call cc-disable-warning,maybe-uninitialized)
 KBUILD_CFLAGS += $(call cc-disable-warning,array-bounds)
 endif
