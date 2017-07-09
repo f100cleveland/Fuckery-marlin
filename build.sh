@@ -16,7 +16,7 @@ export CROSS_COMPILE=${HOME}/Downloads/TC-Q8.0-kryo-aarch/bin/aarch64-QUVNTNM_TO
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.131"
+VER=".pissel-1.132"
 
 # Paths
 KERNEL_DIR=`pwd`
