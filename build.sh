@@ -12,7 +12,7 @@ clear
 THREAD="-j26"
 KERNEL="Image"
 DTBIMAGE="dtb"
-export CROSS_COMPILE=${HOME}/Downloads/gcc-prebuilts-aarch64-linaro-7.x/bin/aarch64-linaro-linux-gnu-
+export CROSS_COMPILE=${HOME}/Downloads/aarch64-8.0/bin/aarch64-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
