@@ -12,7 +12,7 @@ clear
 THREAD="-j26"
 KERNEL="Image"
 DTBIMAGE="dtb"
-export CROSS_COMPILE=${HOME}/Downloads/TC-Q8.0-kryo-aarch/bin/aarch64-linux-android-
+export CROSS_COMPILE=${HOME}/Downloads/gcc-prebuilts-aarch64-linaro-7.x/bin/aarch64-linaro-linux-gnu-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
