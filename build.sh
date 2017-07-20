@@ -24,7 +24,7 @@ REPACK_DIR="${HOME}/AnyKernel"
 PATCH_DIR="${HOME}/AnyKernel/patch"
 MODULES_DIR="${HOME}/AnyKernel/modules"
 ZIP_MOVE="${HOME}/fuckery-out"
-ZIMAGE_DIR="${HOME}/pissel/arch/arm64/boot"
+ZIMAGE_DIR="${HOME}/fuckery/arch/arm64/boot"
 
 # Functions
 function clean_all {
