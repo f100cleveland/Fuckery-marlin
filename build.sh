@@ -12,18 +12,18 @@ clear
 THREAD="-j26"
 KERNEL="Image"
 DTBIMAGE="dtb"
-export CROSS_COMPILE=${HOME}/Downloads/TC-Q8.0-kryo-aarch/bin/aarch64-QUVNTNM_TOOLCHAIN-linux-gnu-
+export CROSS_COMPILE=${HOME}/Downloads/TC-Q8.0-kryo-aarch/bin/aarch64-linux-android-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.132"
+VER=".pissel-1.133"
 
 # Paths
 KERNEL_DIR=`pwd`
 REPACK_DIR="${HOME}/AnyKernel"
 PATCH_DIR="${HOME}/AnyKernel/patch"
 MODULES_DIR="${HOME}/AnyKernel/modules"
-ZIP_MOVE="${HOME}/fuckery"
+ZIP_MOVE="${HOME}/fuckery-out"
 ZIMAGE_DIR="${HOME}/pissel/arch/arm64/boot"
 
 # Functions
