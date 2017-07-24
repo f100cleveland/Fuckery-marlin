@@ -16,7 +16,7 @@ export CROSS_COMPILE=${HOME}/Downloads/aarch64-8.0/bin/aarch64-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.133"
+VER=".pissel-1.134"
 
 # Paths
 KERNEL_DIR=`pwd`
