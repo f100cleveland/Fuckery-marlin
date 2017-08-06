@@ -16,15 +16,15 @@ export CROSS_COMPILE=${HOME}/Downloads/aarch64-8.0/bin/aarch64-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.135"
+VER=".pissel-1.136"
 
 # Paths
 KERNEL_DIR=`pwd`
-REPACK_DIR="${HOME}/AnyKernel"
-PATCH_DIR="${HOME}/AnyKernel/patch"
-MODULES_DIR="${HOME}/AnyKernel/modules"
-ZIP_MOVE="${HOME}/fuckery-out"
-ZIMAGE_DIR="${HOME}/fuckery/arch/arm64/boot"
+REPACK_DIR="${HOME}/kernels/AnyKernel"
+PATCH_DIR="${HOME}/kernels/AnyKernel/patch"
+MODULES_DIR="${HOME}/kernels/AnyKernel/modules"
+ZIP_MOVE="${HOME}/kernels/fuckery-out"
+ZIMAGE_DIR="${HOME}/kernels/fuckery/arch/arm64/boot"
 
 # Functions
 function clean_all {
@@ -55,12 +55,12 @@ function make_dtb {
 }
 
 function make_boot {
-		cp -vr $ZIMAGE_DIR/Image.gz-dtb ~/AnyKernel/zImage
+		cp -vr $ZIMAGE_DIR/Image.gz-dtb ~/kernels/AnyKernel/zImage
 }
 
 
 function make_zip {
-		cd ~/AnyKernel
+		cd ~/kernels/AnyKernel
 		zip -r9 `echo $AK_VER`.zip *
 		mv  `echo $AK_VER`.zip $ZIP_MOVE
 		cd $KERNEL_DIR
