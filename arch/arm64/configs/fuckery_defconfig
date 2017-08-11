@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 3.18.63 Kernel Configuration
+# Linux/arm64 3.18.64 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -4165,8 +4165,6 @@ CONFIG_EFI_RUNTIME_WRAPPERS=y
 CONFIG_EFI_ARMSTUB=y
 # CONFIG_MSM_TZ_LOG is not set
 # CONFIG_BIF is not set
-# CONFIG_MOBICORE_DEBUG is not set
-# CONFIG_TRUSTONIC_TRUSTED_UI is not set
 
 #
 # Firmware Drivers
