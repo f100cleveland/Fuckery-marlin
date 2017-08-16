@@ -12,11 +12,11 @@ clear
 THREAD="-j26"
 KERNEL="Image"
 DTBIMAGE="dtb"
-export CROSS_COMPILE=${HOME}/Downloads/TC-Q8.0-kryo-aarch/bin/aarch64-linux-android-
+export CROSS_COMPILE=${HOME}/roms/pd/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-8.x/bin/aarch64-linux-android-
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.139"
+VER=".pissel-1.14"
 
 # Paths
 KERNEL_DIR=`pwd`
