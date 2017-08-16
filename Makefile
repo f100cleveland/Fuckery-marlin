@@ -404,7 +404,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
 		   -std=gnu89 -Wno-format-truncation -Wno-bool-operation \
-		   -Wno-memset-elt-size -Wno-format-overflow -fno-store-merging \
+		   -Wno-memset-elt-size -Wno-format-overflow \
            -mcpu=cortex-a57.cortex-a53+crc+crypto -mtune=cortex-a57.cortex-a53 \
            -ffast-math
 
