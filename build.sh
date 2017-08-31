@@ -16,7 +16,7 @@ export CROSS_COMPILE=${HOME}/roms/pd/prebuilts/gcc/linux-x86/aarch64/aarch64-lin
 DEFCONFIG="fuckery_defconfig"
 
 # Kernel Details
-VER=".pissel-1.14"
+VER=".pissel-1.142"
 
 # Paths
 KERNEL_DIR=`pwd`
